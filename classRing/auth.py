@@ -17,10 +17,10 @@ def register():
     if request.method == "POST":
         username = form.username.data
         email = form.email.data
-        hashed_pw = bcrypt.generate_password_hash(form.password.data)
+        pw1 = form.password.data
         pw2 = form.password2.data
-        if pw2 == form.password.data:
-            user = Users(username=username, password=hashed_pw, email=email)
+        if pw2 == pw1:
+            user = Users(username=username, password=bcrypt.generate_password_hash(pw1), email=email)
             db.session.add(user)
             db.session.commit()
             flash("Account Registered!")

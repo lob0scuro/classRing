@@ -25,6 +25,9 @@ def create_app(test_config=None):
     from classRing.models import db, login_manager
     db.init_app(app)
     login_manager.init_app(app)
+    
+    from classRing.auth import bcrypt
+    bcrypt.init_app(app)
      
 
     
