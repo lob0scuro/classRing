@@ -35,4 +35,4 @@ class CreateRing(FlaskForm):
     category = StringField('Category', validators=[DataRequired()])
     due_date = DateField('Due date')
     value = IntegerField('Ring Value', validators=[DataRequired()])
-    status = BooleanField('Completed')
+    submit = SubmitField('Submit')

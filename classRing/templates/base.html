@@ -30,18 +30,19 @@
           </ul>
         </div>
       </nav>
-    <h1 class="display-2 text-center pt-3"><img src="{{ url_for('static', filename='images/circle.svg') }}" alt="" width="50" height="45" class=""> Class Ring</h1>
-    <p class="fs-3 text-center">{% block title %}{% endblock %}</p>
-    <div class="container-fluid">
+    
+      <div class="container-fluid">
         {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul class=flashes>
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
+          {% if messages %}
+          <ul class=flashes>
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
             {% endif %}
         {% endwith %}
+            
+        <p class="fs-3 text-center">{% block title %}{% endblock %}</p>
         {% block content %}
         {% endblock %}
     </div>

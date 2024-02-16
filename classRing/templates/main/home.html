@@ -1,8 +1,15 @@
 {% extends "base.html" %}
-{% block title %}Home Page{% endblock %}
+{% block title %}<h1 class="display-2 text-center pt-3"><img src="{{ url_for('static', filename='images/circle.svg') }}" alt="" width="50" height="45" class=""> Class Ring</h1>{% endblock %}
 
 {% block content %}
 
+
 <h3 class="text-center pt-5">Welcome {{ current_user.username }}, to the Class Ring Dashboard</h3>
+
+<br><br>
+
+<div class="text-center">
+    <a class="btn btn-info" href="{{ url_for('main.create_ring') }}">Create Ring</a>
+</div>
 
 {% endblock %}
