@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}View Ring{% endblock %}
+
+
+
+{% block content %}
+
+<div class="row pt-3">
+    <div class="card w-50 mx-auto">
+        <div class="prog-container card-img-top">
+            <svg class="progress-ring" width="400" height="400">
+                <circle r="150" cx="200" cy="200" fill="none" stroke="grey" stroke-width="3" stroke-dasharray="3" />
+                <circle class="moving-ring" r="150" cx="200" cy="200" fill="none" stroke="darkblue" stroke-width="8" />
+                <text x="190" y="200" ></text>
+            </svg>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Test Ring</h5>  
+            <p class="card-text">This ring is for testing and</p>             
+            <p class="card-text">does not contain any relevant data</p>             
+        </div>
+    </div>
+</div>
+
+<script>
+    let circle = document.querySelector('.moving-ring');
+    let radius = circle.r.baseVal.value;
+    let circum = (radius * 2) * Math.PI;
+    circle.style.strokeDasharray = circum;
+
+    setPercentage(45)
+
+    function setPercentage(percentage) {
+        circle.style.strokeDashoffset = circum - (percentage/100) * circum;
+        let text = document.querySelector('percentage-text');
+        text.innerHTML += `${percentage}%`;
+
+    };
+
+</script>
+
+
+{% endblock %}

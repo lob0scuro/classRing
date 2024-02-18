@@ -32,4 +32,4 @@ def create_ring():
 
 @mainBP.route("/view_rings", methods=('GET', 'POST'))
 def view_rings():
-    pass
+    return render_template('main/view_rings.html')

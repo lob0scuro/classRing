@@ -1,32 +1,61 @@
 {% extends "base.html" %}
 {% block title %}Create Ring{% endblock %}
 
+
+
 {% block content %}
 
-
-<div class="row pt-5 w-50 mx-auto border text-center">
-    <h3 class="text-center pb-3">Let's make a ring!</h3>
-    <form action="{{ url_for('main.create_ring') }}" method="POST">
-        {{ form.csrf_token }}
-        <div class="form-group pb-3">
-            {{ form.title.label }}
-            {{ form.title(size=32) }}
+<div class="row pt-3">
+    <div class="card w-50 mx-auto">
+        <div class="prog-container card-img-top">
+            <svg class="progress-ring" width="400" height="400">
+                <circle r="150" cx="200" cy="200" fill="none" stroke="grey" stroke-width="3" stroke-dasharray="3" />
+                <circle class="moving-ring" r="150" cx="200" cy="200" fill="none" stroke="darkblue" stroke-width="4" />
+                <text x="190" y="200" >75%</text>
+            </svg>
         </div>
-        <div class="form-group pb-3">
-            {{ form.category.label }}
-            {{ form.category(size=32) }}
+        <div class="card-body">
+            <form action="{{ url_for('main.create_ring') }}" method="POST">
+                {{ form.csrf_token }}
+                <h5 class="card-title">
+                    <div class="form-group pb-3">
+                        {{ form.title.label }}
+                        {{ form.title(size=32) }}
+                    </div>
+                </h5>
+                <h5 class="card-text">
+                    <div class="form-group pb-3">
+                        {{ form.category.label }}
+                        {{ form.category(size=32) }}
+                    </div>
+                </h5>
+                <h5 class="card-text">
+                    <div class="card-text form-group pb-3">
+                        {{ form.due_date.label }}
+                        {{ form.due_date(size=32) }}
+                    </div>
+                </h5>
+                <h5 class="card-text">
+                    <div class="card-text form-group pb-3">
+                        {{ form.value.label }}
+                        {{ form.value(size=32) }}
+                    </div>
+                </h5>
+                <br>
+                <div class="text-center">
+                    {{ form.submit() }}
+                </div>
+            </form>                
         </div>
-        <div class="form-group pb-3">
-            {{ form.due_date.label }}
-            {{ form.due_date(size=32) }}
-        </div>
-        <div class="form-group pb-3">
-            {{ form.value.label }}
-            {{ form.value(size=32) }}
-        </div>
-        <br>
-        {{ form.submit() }}
-    </form>
+    </div>
 </div>
+
+<!-- <script>
+    let circle = document.querySelector('.moving-ring')
+    let circum = circle.r.baseVal.value
+    let radius = circum * 2 * Math.PI
+    circle.style.strokeDashoffset = 350
+</script> -->
+
 
 {% endblock %}
