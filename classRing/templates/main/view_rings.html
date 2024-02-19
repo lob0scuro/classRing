@@ -15,7 +15,7 @@
             </svg>
         </div>
         <div class="card-body">
-            <h5 class="card-title">Test Ring</h5>  
+            <h5 class="card-title"></h5>  
             <p class="card-text">This ring is for testing and</p>             
             <p class="card-text">does not contain any relevant data</p>             
         </div>
@@ -28,7 +28,7 @@
     let circum = (radius * 2) * Math.PI;
     circle.style.strokeDasharray = circum;
 
-    setPercentage(45)
+    setPercentage(80)
 
     function setPercentage(percentage) {
         circle.style.strokeDashoffset = circum - (percentage/100) * circum;
