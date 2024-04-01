@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineExpose } from "vue";
+import { ref } from "vue";
 let showForm = ref(false);
 
 const toggleAdminForm = () => {
@@ -39,7 +39,7 @@ nav {
 }
 
 h1 {
-  text-decoration: 2px underline;
+  text-decoration: underline;
 }
 i {
   font-size: 2rem;
@@ -67,7 +67,9 @@ form {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  padding-top: 15px;
+  padding: 15px 0;
+
+  background-color: var(--primary2);
 }
 
 form input:not([type="submit"]) {
@@ -76,11 +78,11 @@ form input:not([type="submit"]) {
 }
 
 input[type="submit"] {
-  background-color: var(--primary2);
+  background-color: var(--primary1);
   color: var(--textSecondary);
   border: none;
   border-radius: 25px;
-  padding: 2px 8px;
+  padding: 5px 10px;
 
   font-weight: 600;
   font-family: inherit;
