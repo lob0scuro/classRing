@@ -1,0 +1,52 @@
+:root,
+:root.light {
+  --bgDark: #7045af;
+  --bgLight: #e14594;
+  --textDark: #e14594;
+  --textLight: #e7e7e7;
+  --pure: #fefefe;
+  --font: "Audiowide", sans-serif;
+}
+:root.dark {
+  --bgDark: #0f0e0f;
+  --bgLight: #212529;
+  --textDark: #0dcaf0;
+  --textLight: #fefefe;
+  --pure: #0dcaf0;
+  --font: "Audiowide", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(90deg, var(--bgDark), var(--bgLight));
+}
+
+nav {
+  background-color: var(--bgDark);
+  color: var(--textLight);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2% 5%;
+}
+
+nav i {
+  font-size: 2rem;
+}
+
+/* index.html form styles */
+
+form#studentRegistration {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  text-align: center;
+  width: 40vw;
+  background-color: var(--bgLight);
+  padding: 15% 5%;
+}

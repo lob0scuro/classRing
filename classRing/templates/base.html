@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--import stylesheet-->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <!--import vuejs-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!--import fontawesome-->
+    <script
+      src="https://kit.fontawesome.com/32fa155dce.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>classRing</title>
+  </head>
+  <body>
+    <div id="app">
+      <nav>
+        <h1>classRing</h1>
+        <i class="fa-solid fa-bars"></i>
+      </nav>
+    </div>
+    {% block content %}{% endblock %}
+    <script>
+      const app = Vue.createApp({
+        delimiters: ["[[", "]]"],
+        data() {
+          return {
+            message: "Hello from vue",
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
