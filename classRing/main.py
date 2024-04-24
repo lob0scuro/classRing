@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, session, request
 from classRing.forms import UserForm
-from classRing.models import Student, Admin, Ring, db
+from classRing.models import Student, Admin, db
 
 mainBP = Blueprint("main", __name__, url_prefix="/")
 
@@ -9,8 +9,9 @@ def dash():
     form = UserForm()
     if form.validate_on_submit():
         name = form.name.data
-
-        if form.is_admin.data:
+        is_admin = form.is_admin.data
+        admin_id = Admin.query.filter_by(id=1).first()
+        if is_admin:
             try:
                 admin = Admin(name=name.capitalize())
                 db.session.add(admin)
@@ -20,7 +21,7 @@ def dash():
                 db.session.rollback()
         else:
             try:
-                student = Student(name=name.capitalize())
+                student = Student.create_with_ring(name=name.capitalize(), admin_id=admin_id.id)
                 db.session.add(student)
                 db.session.commit()
             except Exception as e:

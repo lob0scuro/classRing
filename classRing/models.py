@@ -2,29 +2,36 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class Student(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(50), nullable=False)
-    ring_id = db.Column(db.Integer, db.ForeignKey('ring.id'), nullable=False)
-    ring = db.relationship('Ring', backref=db.backref('students', uselist=False, lazy=True))
-
-    def __repr__(self):
-        return f"{self.name}"
-
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50), nullable=False)
-    rings = db.relationship('Ring', backref=db.backref('admin', lazy=True))
+    current_value = db.Column(db.Integer, default=0)
+    target_value = db.Column(db.Integer, default=int(100000))
+    students = db.relationship('Student', backref='admin', lazy=True)
+    
 
-    def __repr__(self):
-        return f"{self.name}"
+class Student(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(50), nullable=False)
+    admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False)
+    ring = db.relationship('Ring', backref='student', uselist=False, lazy=True)
+
+    @staticmethod
+    def create_with_ring(name, admin_id):
+        student = Student(name=name, admin_id=admin_id)
+        db.session.add(student)
+        db.session.commit()
+        # Automatically create a Ring instance for the student
+        student.create_ring()
+        return student
+
+    def create_ring(self):
+        ring = Ring(student_id=self.id, current_value=0, target_value=500)
+        db.session.add(ring)
+        db.session.commit()
 
 class Ring(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False)
-    is_master = db.Column(db.Boolean, nullable=False)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=False)
     current_value = db.Column(db.Integer, nullable=False)
     target_value = db.Column(db.Integer, nullable=False)
-
-    def __repr__(self):
-        return f"{self.current_value}/{self.target_value}"
