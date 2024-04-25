@@ -1,10 +1,12 @@
 import os
 from flask import Flask
 from flask_login import LoginManager
+from flask_migrate import Migrate
 from instance.config import Config
 
 
 login_manager = LoginManager()
+
 
 
 def create_app(test_config=None):
@@ -19,9 +21,11 @@ def create_app(test_config=None):
 
 
     from .models import db
+    migrate = Migrate(app, db)
     with app.app_context():
         db.init_app(app)
         login_manager.init_app(app)
+        migrate.init_app(app)
 
 
     from .main import mainBP

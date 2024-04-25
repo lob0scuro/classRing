@@ -17,6 +17,7 @@ class Admin(db.Model, UserMixin):
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50), nullable=False)
+    is_active = db.Column(db.Boolean, default=False)
     admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False)
     ring = db.relationship('Ring', backref='student', uselist=False, lazy=True)
 
