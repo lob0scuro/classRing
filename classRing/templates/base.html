@@ -15,7 +15,7 @@
       src="https://kit.fontawesome.com/32fa155dce.js"
       crossorigin="anonymous"
     ></script>
-    <title>classRing</title>
+    <title>{% block title %}classRing{% endblock %}</title>
   </head>
   <body>
     <div id="app">
@@ -24,7 +24,11 @@
         <i class="fa-solid fa-bars"></i>
       </nav>
     </div>
-    {% block content %}{% endblock %}
+    {% with messages = get_flashed_messages() %} {% for message in messages %}
+    <ul>
+      <li>{{ message }}</li>
+    </ul>
+    {% endfor %} {% endwith %} {% block content %}{% endblock %}
     <script>
       const app = Vue.createApp({
         delimiters: ["[[", "]]"],

@@ -1,32 +1,6 @@
-{% extends "base.html" %} 
-{% block content %}
-<form
-  action="{{ url_for('main.dash') }}"
-  method="post"
-  id="studentRegistration"
->
-  {{ form.csrf_token }} {{ form.is_admin.label }} {{ form.is_admin }} {{
-  form.name.label }} {{ form.name }}
-  {{ form.email }}
-  {{ form.password }}
-  {{ form.submit }}
+{% extends "base.html" %} {% block content %}
+<form method="post" id="studentRegistration">
+  {{ form.csrf_token }} {{ form.name }} {{ form.password }} {{ form.submit }}
 </form>
 
-<script defer>
-  const checkAdmin = document.getElementById("is_admin");
-  const emailInput = document.getElementById("email");
-  const passInput = document.getElementById("password");
-  emailInput.setAttribute('style', 'display: none;')
-  passInput.setAttribute('style', 'display: none;')
-
-  setInterval(function anon() {
-    if (checkAdmin.checked) {
-      emailInput.setAttribute('style', 'display: block;')
-      passInput.setAttribute('style', 'display: block;')
-    } else {
-      emailInput.setAttribute('style', 'display: none;')
-      passInput.setAttribute('style', 'display: none;')
-    }
-  }, 10)
-</script>
 {% endblock %}

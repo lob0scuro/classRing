@@ -1,10 +1,14 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
 db = SQLAlchemy()
 
-class Admin(db.Model):
+
+
+class Admin(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
     current_value = db.Column(db.Integer, default=0)
     target_value = db.Column(db.Integer, default=int(100000))
     students = db.relationship('Student', backref='admin', lazy=True)

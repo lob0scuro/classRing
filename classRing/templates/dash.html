@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block title %} {{ current_user.name }}'s
+Dashboard{% endblock %} {% block content %}
+<p>hello, {{ current_user.name }}</p>
+<h3>Register Students</h3>
+<p>Enter student names to create daily Ring</p>
+
+<form method="post">
+  {{ form.csrf_token }} {{ form.name }} {{ form.submit }}
+</form>
+
+<ul>
+  {% for student in students %}
+  <li>
+    {{ student.name }}: {{ student.ring.current_value }}/{{
+    student.ring.target_value }}
+  </li>
+  {% endfor %}
+</ul>
+
+<a href="{{ url_for('main.login') }}">Logout</a>
+{% endblock %}
