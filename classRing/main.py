@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, session, reques
 from flask_login import login_required, login_user, logout_user, current_user
 from classRing import login_manager
 from classRing.forms import LoginForm, StudentForm
-from classRing.models import Student, Admin, db
+from classRing.models import Student, Admin, Ring, db
 
 
 mainBP = Blueprint("main", __name__, url_prefix="/")
@@ -30,6 +30,7 @@ def login():
             login_user(user)
             return redirect(url_for('.dash'))
         else:
+            flash(f"Password for user: {name.capitalize()}, is incorrect. Try again")
             return redirect(url_for('.login'))
 
     return render_template("index.html", form=form)
@@ -59,7 +60,24 @@ def dash():
 
 
 
-
+@mainBP.route("dash/delete/<int:sid>", methods=['DELETE'])
+@login_required
+def delete(sid):
+    if request.method == 'DELETE':
+        student = Student.query.get(int(sid))
+        ring = Ring.query.get(int(sid))
+        if not student:
+            print("Student not found in database")
+            return redirect(url_for('.dash'))
+        try:
+            db.session.delete(student)
+            db.session.delete(ring)
+            db.session.commit()
+            print(f"{student.name} deleted from queue")
+        except Exception as e:
+            print(f"Error: {e}")
+            db.session.rollback()
+    return redirect(url_for('.dash'))
 
 
 

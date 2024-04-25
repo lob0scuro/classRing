@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block title %} {{ current_user.name }}'s
 Dashboard{% endblock %} {% block content %}
-<p>hello, {{ current_user.name }}</p>
+<p>Hello, {{ current_user.name }}: {{ current_user.current_value }}/{{ current_user.target_value }}</p>
 <h3>Register Students</h3>
 <p>Enter student names to create daily Ring</p>
 
@@ -12,10 +12,24 @@ Dashboard{% endblock %} {% block content %}
   {% for student in students %}
   <li>
     {{ student.name }}: {{ student.ring.current_value }}/{{
-    student.ring.target_value }}
-  </li>
+    student.ring.target_value }} &nbsp;&nbsp;<button id="deleteButton" data-sid="{{student.id}}" onclick="deleteFrom()"><i class="fa-regular fa-trash-can"></i></button>
+    </li>
   {% endfor %}
 </ul>
 
 <a href="{{ url_for('main.login') }}">Logout</a>
+
+<script>
+  var sid = document.getElementById("deleteButton").dataset.sid;
+  var url = {{ url_for('main.delete', sid=sid) }}
+  console.log(url)
+  function deleteFrom() {
+    fetch(url, {
+      method: 'DELETE',
+      body: null
+    })
+  }
+  
+</script>
+
 {% endblock %}
