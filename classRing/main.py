@@ -74,7 +74,8 @@ def update(sid, val):
         student.ring.current_value += 1
         db.session.commit()
     elif str(val.lower()) == 'sub':
-        student.ring.current_value = -1
+        student.ring.current_value -= 1
+        db.session.commit()
     else:
         flash("incorrent url param")
     return redirect(url_for('.platform'))

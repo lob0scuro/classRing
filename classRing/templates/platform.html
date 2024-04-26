@@ -10,8 +10,8 @@ block content %}
         <div class="user-block">
             <strong>{{ student.name }}</strong>
             <div class="controller-block">
-                <button class="controller-btn sub" data-value="sub">-</button>
-                <button class="controller-btn add" data-value="add">+</button>
+                <a href="{{ url_for('main.update', sid=student.id, val='sub') }}"><button class="controller-btn sub" data-value="sub">-</button></a>
+                <a href="{{ url_for('main.update', sid=student.id, val='add') }}"><button class="controller-btn add" data-value="add">+</button></a>
             </div>
         </div>
     </div>

@@ -17,13 +17,13 @@ Dashboard{% endblock %} {% block content %}
     
     {% if student.is_active is sameas true %}
     <li class="go student active-student">
-      {{ student.id }} {{ student.name }} &nbsp;&nbsp;
+      {{ student.name }} &nbsp;&nbsp;
     <a href="{{ url_for('main.delete', sid=student.id) }}"><i class="fa-regular fa-trash-can"></i></a>
     <p class="status">Status: active | <a class="stop text-small" href="{{ url_for('main.deactivate', sid=student.id) }}">-remove</a></p>
     
     {% else %}
     <li class="stop student inactive-student">
-      {{ student.id }} {{ student.name }} &nbsp;&nbsp;
+      {{ student.name }} &nbsp;&nbsp;
     <a href="{{ url_for('main.delete', sid=student.id) }}"><i class="fa-regular fa-trash-can"></i></a>
     <p class="status">Status: waiting...  | <a class="go text-small" href="{{ url_for('main.activate', sid=student.id) }}">+joinQ</a></p>
     
