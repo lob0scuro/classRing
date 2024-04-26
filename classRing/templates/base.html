@@ -11,27 +11,39 @@
     <!--import vuejs-->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <!--import HTMX-->
-    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+    <script
+      src="https://unpkg.com/htmx.org@1.9.12"
+      integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
+      crossorigin="anonymous"
+    ></script>
     <!--import fontawesome-->
-    <script src="https://kit.fontawesome.com/32fa155dce.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/32fa155dce.js"
+      crossorigin="anonymous"
+    ></script>
     <!--import fonts 'google fonts'-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
+      rel="stylesheet"
+    />
     <title>{% block title %}classRing{% endblock %}</title>
   </head>
   <body>
-      <nav>
-        <a href="{{ url_for('main.dash') }}">
-          <h1>classRing</h1>
-        </a>
-        <i class="fa-solid fa-bars"></i>
-      </nav>
-    {% with messages = get_flashed_messages() %} {% for message in messages %}
-    <ul>
+    <nav>
+      <a class="text-glow text-centered" href="{{ url_for('main.dash') }}">
+        <h1>classRing</h1>
+      </a>
+    </nav>
+    {% with messages = get_flashed_messages() %}
+    <ul id="flash-block">
+      {% for message in messages %}
       <li>{{ message }}</li>
+      {% endfor %}
+      <button id="flash-close-btn" onclick="close_flash()">X</button>
     </ul>
-    {% endfor %} {% endwith %} {% block content %}{% endblock %}
-    
+    {% endwith %} {% block content %}{% endblock %}
   </body>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
 </html>

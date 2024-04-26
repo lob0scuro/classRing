@@ -1,20 +1,14 @@
-{% extends 'base.html' %}
-{% block title %}Points Overview{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% block title %}Points Overview{% endblock %} {%
+block content %}
 <ul>
-    {% for student in students %}
-    <li>
-        {{ student.name }}: 
-        {{ student.ring.current_value }}
-    </li>
-    
-    
-    {% endfor %}
+  {% for student in students %}
+  <li>{{ student.name }}: {{ student.ring.current_value }}</li>
+
+  {% endfor %}
 </ul>
-<br><br>
+<br /><br />
 <h5>total: {{ total }}</h5>
-<br><br><br>
-<a href="{{ url_for('main.masterLoader') }}"><button>send to masterRing</button></a>
+<br /><br /><br />
+<a class="btn" href="{{ url_for('main.masterLoader') }}">send to masterRing</a>
 
 {% endblock %}

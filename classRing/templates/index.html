@@ -1,6 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <form method="post" id="studentRegistration">
-  {{ form.csrf_token }} {{ form.name }} {{ form.password }} {{ form.submit }}
+  {{ form.csrf_token }} {{ form.name(placeholder="username") }} {{
+  form.password(placeholder="password") }} {{ form.submit(class_='btn') }}
 </form>
 
 {% endblock %}

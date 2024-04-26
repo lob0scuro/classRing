@@ -1,9 +1,9 @@
 :root,
 :root.light {
-  --bgDark: #7045af;
-  --bgLight: #e14594;
-  --textDark: #e14594;
-  --textLight: #e7e7e7;
+  --bgDark: #b2b5e0;
+  --bgLight: #c5adc5;
+  --textDark: #c5adc5;
+  --textLight: #c5adc5;
   --pure: #fefefe;
   --font: "Audiowide", sans-serif;
 }
@@ -31,50 +31,92 @@ body {
   max-width: 500px;
 }
 
-nav {
-  background-color: var(--bgDark);
-  color: var(--textLight);
+/*FLASH BLOCK*/
+ul#flash-block {
+  width: 100%;
+  height: 75px;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 5%;
+  padding: 2% 5%;
+  list-style: none;
+  background-color: var(--textLight);
+  position: relative;
+  top: -20px;
+  color: var(--pure);
+  font-size: 1rem;
 }
 
-nav i {
-  font-size: 2rem;
+ul#flash-block button {
+  background: var(--bgDark);
+  border: outset;
+  color: var(--pure);
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding: 2px 5px;
+}
+
+ul#flash-block button:hover {
+  color: var(--pure);
+  text-shadow: -1px 1px 3px var(--pure);
+}
+
+/*NAVBAR index.html*/
+
+nav {
+  background-color: var(--bgDark);
+  color: var(--textDark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+  box-shadow: 0 10px 8px -1px var(--bgLight);
+  margin-bottom: 25px;
 }
 
 /*UTILS*/
+
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+
 .go {
-  color: #15cb5b;
+  color: var(--pure);
+  text-shadow: -1px 1px 3px limegreen;
 }
 .stop {
-  color: #680000;
+  color: var(--pure);
+  text-shadow: -1px 1px 3px red;
+}
+
+.text-glow {
+  color: var(--pure);
+  text-shadow: -1px 1px 3px var(--pure);
 }
 
 .text-small {
   font-size: 0.8rem;
+  text-shadow: none;
+  color: var(--pure);
 }
 
 .btn {
   color: var(--pure);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 800;
   border: 1px solid var(--pure);
-  border-radius: 50%;
+  border-radius: 15px;
   background-color: var(--textDark);
-  padding: 5px;
+  padding: 10px;
   text-decoration: none;
 }
 
-.btn-go {
-  background-color: #15cb5b;
-}
-.btn-stop {
-  background-color: #680000;
-}
-.del-button {
-  padding: 2px 4px;
+.btn-block {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
 }
 
 /* index.html form styles */
@@ -111,9 +153,6 @@ ul#student-queue li {
   width: 100%;
 }
 
-
-
-
 /*platform.html*/
 
 .rings {
@@ -139,7 +178,6 @@ ul#student-queue li {
   padding-top: 50%;
   margin: 15px auto 15px auto;
 }
-
 
 .rings > .ring > .user-block {
   color: var(--pure);
@@ -169,7 +207,3 @@ ul#student-queue li {
 }
 
 /*comment*/
-
-
-
-

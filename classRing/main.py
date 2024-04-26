@@ -28,6 +28,7 @@ def login():
         
         if password == user.password:
             login_user(user)
+            flash('logged in!')
             return redirect(url_for('.dash'))
         else:
             flash(f"Password for user: {name.capitalize()}, is incorrect. Try again")
@@ -81,7 +82,7 @@ def countPoints():
     return render_template('points-overview.html', students=students, total=total)
 
 
-@mainBP.route('/load-master', methods=('GET', 'POST'))
+@mainBP.route('/load-master', methods=('GET', 'POST', 'UPDATE'))
 @login_required
 def masterLoader():
     students = Student.query.filter(Student.is_active==True, Student.admin_id==current_user.id).all()
@@ -89,11 +90,12 @@ def masterLoader():
     for student in students:
         points.append(student.ring.current_value)
     total = sum(points)
+    print(request.method)
     if request.method == 'GET':
-        current_user.current_value = total
+        masterChamber = Admin.query.get(current_user.id)
+        masterChamber.current_value = masterChamber.current_value + total
         db.session.commit()
         flash(f"{total} points loaded to {current_user.name}'s ring")
-        flash(f"{current_user.name}: {current_user.current_value}/{current_user.target_value}")
     return redirect(url_for('.dash'))
     
     
@@ -102,7 +104,6 @@ def masterLoader():
 @mainBP.route('update/<int:sid>/<val>', methods=('GET', 'POST'))
 @login_required
 def update(sid, val):
-    students = Student.query.filter(Student.is_active==True, Student.admin_id==current_user.id).all()
     student = Student.query.get(sid)
     if str(val.lower()) == 'add':
         student.ring.current_value += 1
@@ -124,6 +125,7 @@ def activate(sid):
         try:
             student_to_activate.is_active = True
             db.session.commit()
+            flash(f'activated {student_to_activate.name}')
         except Exception as e:
             flash(f"Error: {e}")
             db.session.rollback()
@@ -140,6 +142,7 @@ def deactivate(sid):
         try:
             student_to_activate.is_active = False
             db.session.commit()
+            flash(f'deactivated {student_to_activate.name}')
         except Exception as e:
             flash(f"Error: {e}")
             db.session.rollback()

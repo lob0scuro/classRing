@@ -13,28 +13,48 @@ Dashboard{% endblock %} {% block content %}
 </form>
 
 <ul id="student-queue">
-  {% for student in students %}
-    
-    {% if student.is_active is sameas true %}
-    <li class="go student active-student">
-      {{ student.name }} &nbsp;&nbsp;
-    <a href="{{ url_for('main.delete', sid=student.id) }}"><i class="fa-regular fa-trash-can"></i></a>
-    <p class="status">Status: active | <a class="stop text-small" href="{{ url_for('main.deactivate', sid=student.id) }}">-remove</a></p>
-    
+  {% for student in students %} {% if student.is_active is sameas true %}
+  <li class="go student active-student">
+    {{ student.name }} &nbsp;&nbsp;
+    <a href="{{ url_for('main.delete', sid=student.id) }}"
+      ><i class="fa-regular fa-trash-can"></i
+    ></a>
+    <p class="status">
+      Status: active |
+      <a
+        class="stop text-small"
+        href="{{ url_for('main.deactivate', sid=student.id) }}"
+        >-remove</a
+      >
+    </p>
+
     {% else %}
-    <li class="stop student inactive-student">
-      {{ student.name }} &nbsp;&nbsp;
-    <a href="{{ url_for('main.delete', sid=student.id) }}"><i class="fa-regular fa-trash-can"></i></a>
-    <p class="status">Status: waiting...  | <a class="go text-small" href="{{ url_for('main.activate', sid=student.id) }}">+joinQ</a></p>
-    
+  </li>
+
+  <li class="stop student inactive-student">
+    {{ student.name }} &nbsp;&nbsp;
+    <a href="{{ url_for('main.delete', sid=student.id) }}"
+      ><i class="fa-regular fa-trash-can"></i
+    ></a>
+    <p class="status">
+      Status: waiting... |
+      <a
+        class="go text-small"
+        href="{{ url_for('main.activate', sid=student.id) }}"
+        >+joinQ</a
+      >
+    </p>
+
     {% endif %}
   </li>
   <br />
   {% endfor %}
 </ul>
-
-<a href="{{ url_for('main.platform') }}"><button>Start Game</button></a>
 <br /><br />
-<a href="{{ url_for('main.login') }}">Logout</a>
+<div class="btn-block">
+  <a class="btn" href="{{ url_for('main.platform') }}">Start</a>
+  <br /><br />
+  <a href="{{ url_for('main.login') }}" class="btn">Logout</a>
+</div>
 
 {% endblock %}
