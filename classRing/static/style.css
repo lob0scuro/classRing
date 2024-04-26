@@ -50,16 +50,18 @@ ul#flash-block {
 
 ul#flash-block button {
   background: var(--bgDark);
-  border: outset;
+  border: none;
+  border-radius: 50%;
   color: var(--pure);
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   font-weight: 800;
-  padding: 2px 5px;
+  padding: 8px;
+  box-shadow: -1px 2px var(--pure);
 }
 
 ul#flash-block button:hover {
   color: var(--pure);
-  text-shadow: -1px 1px 3px var(--pure);
+  text-shadow: -1px 1px 1px var(--pure);
 }
 
 /*NAVBAR index.html*/
