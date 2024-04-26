@@ -3,19 +3,21 @@ block content %}
 <div class="rings">
     {% for student in students %}
     <div class="ring">
-        <div class="circle">
-            {{ student.ring.current_value }}/{{
-                student.ring.target_value }}
+        <div class=" circle circle-for-{{ student.id }}">
+            {% include 'circles.html' %}
         </div>
         <div class="user-block">
             <strong>{{ student.name }}</strong>
             <div class="controller-block">
-                <a href="{{ url_for('main.update', sid=student.id, val='sub') }}"><button class="controller-btn sub" data-value="sub">-</button></a>
-                <a href="{{ url_for('main.update', sid=student.id, val='add') }}"><button class="controller-btn add" data-value="add">+</button></a>
+                <a hx-post="{{ url_for('main.update', sid=student.id, val='sub') }}" hx-target=".circle-for-{{ student.id }}" hx-trigger="click"><button class="controller-btn sub" data-value="sub">-</button></a>
+                <a hx-post="{{ url_for('main.update', sid=student.id, val='add') }}" hx-target=".circle-for-{{ student.id }}" hx-trigger="click"><button class="controller-btn add" data-value="add">+</button></a>
             </div>
         </div>
     </div>
     {% endfor %}
+</div>
+<div class="points-loader">
+    <a href="{{ url_for('main.countPoints') }}"><button>Load Points</button></a>
 </div>
 
 {% endblock %}

@@ -66,9 +66,43 @@ def platform():
 
 
 #CURRENT TASK
+@mainBP.route('/points', methods=('GET', 'POST'))
+@login_required
+def countPoints():
+    students = Student.query.filter(Student.is_active==True, Student.admin_id==current_user.id).all()
+    points =[]
+    for student in students:
+        points.append(student.ring.current_value)
+    total = sum(points)
+    
+    
+    
+    
+    return render_template('points-overview.html', students=students, total=total)
+
+
+@mainBP.route('/load-master', methods=('GET', 'POST'))
+@login_required
+def masterLoader():
+    students = Student.query.filter(Student.is_active==True, Student.admin_id==current_user.id).all()
+    points =[]
+    for student in students:
+        points.append(student.ring.current_value)
+    total = sum(points)
+    if request.method == 'GET':
+        current_user.current_value = total
+        db.session.commit()
+        flash(f"{total} points loaded to {current_user.name}'s ring")
+        flash(f"{current_user.name}: {current_user.current_value}/{current_user.target_value}")
+    return redirect(url_for('.dash'))
+    
+    
+
+
 @mainBP.route('update/<int:sid>/<val>', methods=('GET', 'POST'))
 @login_required
 def update(sid, val):
+    students = Student.query.filter(Student.is_active==True, Student.admin_id==current_user.id).all()
     student = Student.query.get(sid)
     if str(val.lower()) == 'add':
         student.ring.current_value += 1
@@ -78,8 +112,7 @@ def update(sid, val):
         db.session.commit()
     else:
         flash("incorrent url param")
-    return redirect(url_for('.platform'))
-    
+    return render_template('circles.html', student=student)
 
 @mainBP.route("/activate/<int:sid>", methods=('POST', 'GET'))
 @login_required

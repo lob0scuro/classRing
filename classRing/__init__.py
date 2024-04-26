@@ -2,11 +2,12 @@ import os
 from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_cors import CORS
 from instance.config import Config
 
 
 login_manager = LoginManager()
-
+cors = CORS()
 
 
 def create_app(test_config=None):
@@ -26,6 +27,7 @@ def create_app(test_config=None):
         db.init_app(app)
         login_manager.init_app(app)
         migrate.init_app(app)
+        cors.init_app(app)
 
 
     from .main import mainBP
