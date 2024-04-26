@@ -1,30 +1,35 @@
 {% extends "base.html" %} {% block title %} {{ current_user.name }}'s
 Dashboard{% endblock %} {% block content %}
-<p>
-  Hello, {{ current_user.name }}: {{ current_user.current_value }}/{{
-  current_user.target_value }}
-</p>
-<h3>Register Students</h3>
-<p>Enter student names to create daily Ring</p>
+<div class="greeting-block">
+  <p>
+    Hello, {{ current_user.name }}: {{ current_user.current_value }}/{{
+    current_user.target_value }}
+  </p>
+  <h3>Register Students</h3>
+</div>
 
-<form method="post">
+<form id="register-student-form" method="post">
   {{ form.csrf_token }} {{ form.name }} {{ form.submit }}
 </form>
 
-<ul>
+<ul id="student-queue">
   {% for student in students %}
-  <li>
-    {{ student.id }} {{ student.name }}: {{ student.ring.current_value }}/{{
-    student.ring.target_value }} &nbsp;&nbsp;<a
-      href="{{ url_for('main.delete', sid=student.id) }}"
-      ><i class="fa-regular fa-trash-can"></i>
-    </a>
+    
     {% if student.is_active is sameas true %}
-    <p>Status: active</p>
+    <li class="go student active-student">
+      {{ student.id }} {{ student.name }} &nbsp;&nbsp;
+    <a href="{{ url_for('main.delete', sid=student.id) }}"><i class="fa-regular fa-trash-can"></i></a>
+    <p class="status">Status: active | <a class="stop text-small" href="{{ url_for('main.deactivate', sid=student.id) }}">-remove</a></p>
+    
     {% else %}
-    <p>Status: waiting...</p>
+    <li class="stop student inactive-student">
+      {{ student.id }} {{ student.name }} &nbsp;&nbsp;
+    <a href="{{ url_for('main.delete', sid=student.id) }}"><i class="fa-regular fa-trash-can"></i></a>
+    <p class="status">Status: waiting...  | <a class="go text-small" href="{{ url_for('main.activate', sid=student.id) }}">+joinQ</a></p>
+    
     {% endif %}
   </li>
+  <br />
   {% endfor %}
 </ul>
 

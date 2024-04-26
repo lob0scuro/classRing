@@ -18,12 +18,17 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   background-image: linear-gradient(90deg, var(--bgDark), var(--bgLight));
+  font-family: var(--font);
+  min-width: 380px;
+  max-width: 500px;
 }
 
 nav {
@@ -32,11 +37,44 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2% 5%;
+  padding: 5%;
 }
 
 nav i {
   font-size: 2rem;
+}
+
+/*UTILS*/
+.go {
+  color: #15cb5b;
+}
+.stop {
+  color: #680000;
+}
+
+.text-small {
+  font-size: 0.8rem;
+}
+
+.btn {
+  color: var(--pure);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--pure);
+  border-radius: 50%;
+  background-color: var(--textDark);
+  padding: 5px;
+  text-decoration: none;
+}
+
+.btn-go {
+  background-color: #15cb5b;
+}
+.btn-stop {
+  background-color: #680000;
+}
+.del-button {
+  padding: 2px 4px;
 }
 
 /* index.html form styles */
@@ -50,3 +88,88 @@ form#studentRegistration {
   background-color: var(--bgLight);
   padding: 15% 5%;
 }
+
+/*dash.html*/
+.greeting-block {
+  text-align: center;
+}
+
+form#register-student-form {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+ul#student-queue {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  list-style: none;
+}
+
+ul#student-queue li {
+  text-align: start;
+  width: 100%;
+}
+
+
+
+
+/*platform.html*/
+
+.rings {
+  text-align: center;
+  margin: 5% auto 0 auto;
+}
+
+.rings > .ring {
+  background-image: linear-gradient(90deg, var(--bgLight), var(--bgDark));
+  width: 350px;
+  margin: 0 auto 15px auto;
+  padding: 2%;
+  border: 1px solid var(--pure);
+}
+
+.rings > .ring > .circle {
+  width: 300px;
+  height: 300px;
+  font-size: 1.5rem;
+  border: 2px solid var(--pure);
+  border-radius: 50%;
+  text-align: center;
+  padding-top: 50%;
+  margin: 15px auto 15px auto;
+}
+
+
+.rings > .ring > .user-block {
+  color: var(--pure);
+  line-height: 2;
+}
+
+.rings > .ring > .user-block > strong {
+  font-size: 2.2rem;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+
+.controller-btn {
+  font-weight: 900;
+  width: 80px;
+  height: 40px;
+  color: var(--pure);
+}
+
+.controller-btn.add {
+  background-color: var(--bgLight);
+  border-radius: 0 35px 35px 0;
+}
+.controller-btn.sub {
+  background-color: var(--bgDark);
+  border-radius: 35px 0 0 35px;
+}
+
+/*comment*/
+
+
+
+

@@ -61,10 +61,24 @@ def dash():
 @mainBP.route("/platform", methods=('GET', 'POST'))
 @login_required
 def platform():
-    students = Student.query.filter_by(is_active=True).all()
+    students = Student.query.filter(Student.is_active==True, Student.admin_id==current_user.id).all()
     return render_template('platform.html', students=students)
 
 
+#CURRENT TASK
+@mainBP.route('update/<int:sid>/<val>', methods=('GET', 'POST'))
+@login_required
+def update(sid, val):
+    student = Student.query.get(sid)
+    if str(val.lower()) == 'add':
+        student.ring.current_value += 1
+        db.session.commit()
+    elif str(val.lower()) == 'sub':
+        student.ring.current_value = -1
+    else:
+        flash("incorrent url param")
+    return redirect(url_for('.platform'))
+    
 
 @mainBP.route("/activate/<int:sid>", methods=('POST', 'GET'))
 @login_required
