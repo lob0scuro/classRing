@@ -1,3 +1,8 @@
-
-{{ student.ring.current_value }}/{{
-    student.ring.target_value }}
+<div class="score">
+  <span class="current_score {{ student.name }}Score"
+    >{{ student.ring.current_value }}</span
+  >/{{ student.ring.target_value }}
+</div>
+<svg class="circ-box" width="350" height="350">
+  <circle class="circ circ4{{ student.name }}" r="150" cx="50%" cy="50%" />
+</svg>

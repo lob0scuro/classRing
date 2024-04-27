@@ -183,4 +183,5 @@ def delete(sid):
 def logout():
     logout_user()
     session.clear()
+    flash(f"You have been logged out")
     return redirect(url_for('.login'))
