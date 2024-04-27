@@ -5,6 +5,7 @@ from classRing.forms import LoginForm, StudentForm
 from classRing.models import Student, Admin, Ring, db
 
 
+
 mainBP = Blueprint("main", __name__, url_prefix="/")
 
 login_manager.login_view = '.login'
@@ -66,6 +67,13 @@ def platform():
     students = Student.query.filter(Student.is_active==True, Student.admin_id==current_user.id).all()
     return render_template('platform.html', students=students)
 
+@mainBP.route('/get_current_points/<int:sid>/', methods=('GET', 'POST'))
+@login_required
+def get_current_points(sid):
+    student = Student.query.get(sid)
+    return str(student)
+
+
 
 #CURRENT TASK
 @mainBP.route('/points', methods=('GET', 'POST'))
@@ -76,9 +84,6 @@ def countPoints():
     for student in students:
         points.append(student.ring.current_value)
     total = sum(points)
-    
-    
-    
     
     return render_template('points-overview.html', students=students, total=total)
 

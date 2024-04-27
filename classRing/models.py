@@ -1,7 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+from flask_marshmallow import Marshmallow
 
 db = SQLAlchemy()
+ma = Marshmallow()
 
 
 
@@ -40,3 +42,8 @@ class Ring(db.Model):
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=False)
     current_value = db.Column(db.Integer, nullable=False)
     target_value = db.Column(db.Integer, nullable=False)
+
+
+class StudentPoint(ma.ModelSchema):
+    class Meta:
+        model = Student

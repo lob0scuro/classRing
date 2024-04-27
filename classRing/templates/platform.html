@@ -42,25 +42,27 @@ block content %}
 </div>
 <a class="btn center" href="{{ url_for('main.countPoints') }}">Load Points</a>
 
-<script>
-  let progressCircle = document.querySelector(".circ");
-  let score = document.querySelectorAll("span.current_score");
-  let scores = [];
-  for (i = 0; i < score.length; i++) {
-    scores.push((parseInt(score[i].innerText) / 500) * 100);
-  }
-  let radius = progressCircle.r.baseVal.value;
-  let circumference = radius * 2 * Math.PI;
-  progressCircle.style.strokeDasharray = circumference;
+<script defer>
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "{{ url_for('main.get_current_points', sid=6) }}");
+  xhr.onload = function () {
+    if (this.status == 200) {
+      console.log(this.responseText);
+    }
+  };
 
-  function setProgress(index) {
-    percent = scores[index];
-    progressCircle.style.strokeDashoffset =
-      circumference - (percent / 100) * circumference;
-    console.log(percent);
-  }
+  xhr.send();
 
-  var test = "{{ current_user.name }}";
-  console.log(scores);
+  let progressCircle = document.querySelectorAll(".circ");
+  //let score = document.querySelectorAll("span.current_score");
+  //let radius = progressCircle.r.baseVal.value;
+  // let circumference = radius * 2 * Math.PI;
+  //progressCircle.style.strokeDasharray = circumference;
+
+  //function setProgress(index) {
+  //  percent = scores[index];
+  //  progressCircle.style.strokeDashoffset =
+  //   circumference - (percent / 100) * circumference;
+  // }
 </script>
 {% endblock %}
