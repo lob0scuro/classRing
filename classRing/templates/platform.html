@@ -4,7 +4,11 @@ block content %}
   {% for student in students %}
   <div class="ring">
     <div class=" circle circle-for-{{ student.id }}">
+        
       {% include 'circles.html' %}
+      <svg id="circular" width="350" height="350">
+        <circle id="circ" r="150" cx="50%" cy="50%" />
+    </svg>
     </div>
     <div class="user-block">
       <strong>{{ student.name }}</strong>
@@ -27,5 +31,11 @@ block content %}
   {% endfor %}
 </div>
 <a class="btn center" href="{{ url_for('main.countPoints') }}">Load Points</a>
+
+
+<script>
+    svg = document.getElementById("circ");
+    svg.style.strokeDashoffset = "{{ students[0].current_value }}";
+</script>
 
 {% endblock %}

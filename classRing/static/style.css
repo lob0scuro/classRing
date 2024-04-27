@@ -162,12 +162,24 @@ ul#student-queue li {
   margin: 5% auto 0 auto;
 }
 
+svg {
+  stroke-width: 10;
+  stroke: #000;
+  fill: none;
+  padding: 2%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  stroke-dasharray: 942;
+}
+
 .rings > .ring {
   background-image: linear-gradient(90deg, var(--bgLight), var(--bgDark));
   width: 350px;
   margin: 0 auto 15px auto;
   padding: 2%;
   border: 1px solid var(--pure);
+  position: relative;
 }
 
 .rings > .ring > .circle {

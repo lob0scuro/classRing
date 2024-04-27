@@ -9,6 +9,7 @@ mainBP = Blueprint("main", __name__, url_prefix="/")
 
 login_manager.login_view = '.login'
 login_manager.login_message = 'Please log in to access the Dashboard'
+login_manager.session_protection = "strong"
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -90,10 +91,11 @@ def masterLoader():
     for student in students:
         points.append(student.ring.current_value)
     total = sum(points)
-    print(request.method)
     if request.method == 'GET':
         masterChamber = Admin.query.get(current_user.id)
         masterChamber.current_value = masterChamber.current_value + total
+        for student in students:
+            student.ring.current_value = 0
         db.session.commit()
         flash(f"{total} points loaded to {current_user.name}'s ring")
     return redirect(url_for('.dash'))
@@ -180,4 +182,5 @@ def delete(sid):
 @login_required
 def logout():
     logout_user()
+    session.clear()
     return redirect(url_for('.login'))
