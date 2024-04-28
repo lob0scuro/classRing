@@ -15,25 +15,13 @@ block content %}
           hx-post="{{ url_for('main.update', sid=student.id, val='sub') }}"
           hx-target=".circle-for-{{ student.id }}"
           hx-trigger="click"
-          ><button
-            onclick=`setProgress({{ student.ring.current_value }}, {{ student.id }})`
-            class="controller-btn sub"
-            data-value="sub"
-          >
-            -
-          </button></a
+          ><button class="controller-btn sub" data-value="sub">-</button></a
         >
         <a
           hx-post="{{ url_for('main.update', sid=student.id, val='add') }}"
           hx-target=".circle-for-{{ student.id }}"
           hx-trigger="click"
-          ><button
-            onclick=`setProgress({{ student.ring.current_value }}, {{ student.id }})`
-            class="controller-btn add"
-            data-value="add"
-          >
-            +
-          </button></a
+          ><button class="controller-btn add" data-value="add">+</button></a
         >
       </div>
     </div>
@@ -43,26 +31,19 @@ block content %}
 <a class="btn center" href="{{ url_for('main.countPoints') }}">Load Points</a>
 
 <script defer>
-  
-
-
-  let progressCircle = document.querySelector(".circ");
-  let score = document.querySelector("span.current_score");
-  let radius = progressCircle.r.baseVal.value;
-  let circumference = radius * 2 * Math.PI;
-  progressCircle.style.strokeDasharray = circumference;
+  //setInterval(setProgress, 2000, );
+  let score = document.querySelector(`span.${sid}-score`).innerHTML;
 
   function setProgress(percent, sid) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", "{{ url_for('main.get_current_points', sid=${sid}) }}");
-    xhr.onload = function () {
-      if (this.status == 200) {
-        setProgress(parseInt(this.responseText));
-      }
-    };
-    xhr.send();
+    percent = (parseInt(percent) / 500) * 100;
+    console.log(percent);
+    let progressCircle = document.querySelector(`.circ4-${sid}`);
+    let radius = progressCircle.r.baseVal.value;
+    let circumference = radius * 2 * Math.PI;
+    progressCircle.style.strokeDasharray = circumference;
+
     progressCircle.style.strokeDashoffset =
-     circumference - (percent / 100) * circumference;
-   }
+      circumference - (percent / 100) * circumference;
+  }
 </script>
 {% endblock %}
