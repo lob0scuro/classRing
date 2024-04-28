@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, session, request, flash
+from flask import Blueprint, render_template, redirect, url_for, session, request, flash, jsonify
 from flask_login import login_required, login_user, logout_user, current_user
 from classRing import login_manager
 from classRing.forms import LoginForm, StudentForm
@@ -71,7 +71,9 @@ def platform():
 @login_required
 def get_current_points(sid):
     student = Student.query.get(sid)
-    return str(student)
+    points = student.ring.current_value
+    
+    return jsonify({student.name: points})
 
 
 

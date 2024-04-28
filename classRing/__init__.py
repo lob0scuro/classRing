@@ -21,14 +21,13 @@ def create_app(test_config=None):
         pass
 
 
-    from .models import db, ma
+    from .models import db
     migrate = Migrate(app, db)
     with app.app_context():
         db.init_app(app)
         login_manager.init_app(app)
         migrate.init_app(app)
         cors.init_app(app)
-        ma.init_app(app)
 
 
     from .main import mainBP
