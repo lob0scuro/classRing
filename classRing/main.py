@@ -73,7 +73,7 @@ def get_current_points(sid):
     student = Student.query.get(sid)
     points = student.ring.current_value
     
-    return jsonify({student.name: points})
+    return points
 
 
 

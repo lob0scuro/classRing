@@ -3,23 +3,23 @@ block content %}
 <div class="rings">
   {% for student in students %}
   <div class="ring">
-    <div class=" circle circle-for-{{ student.id }}">
+    <div class="circle circle4{{ student.id }}">
       {% include 'circles.html' %}
     </div>
     <div class="user-block">
-      <strong class="cardHeader cardHeader{{ student.name }}"
+      <strong data-id="{{ student.id }}" class="cardHeader cardHeader{{ student.name }}"
         >{{ student.name }}</strong
       >
       <div class="controller-block">
         <a
           hx-post="{{ url_for('main.update', sid=student.id, val='sub') }}"
-          hx-target=".circle-for-{{ student.id }}"
+          hx-target=".circle4{{ student.id }}"
           hx-trigger="click"
           ><button class="controller-btn sub" data-value="sub">-</button></a
         >
         <a
           hx-post="{{ url_for('main.update', sid=student.id, val='add') }}"
-          hx-target=".circle-for-{{ student.id }}"
+          hx-target=".circle4{{ student.id }}"
           hx-trigger="click"
           ><button class="controller-btn add" data-value="add">+</button></a
         >
@@ -32,12 +32,26 @@ block content %}
 
 <script defer>
   //setInterval(setProgress, 2000, );
-  let score = document.querySelector(`span.${sid}-score`).innerHTML;
+  //grab rings and scores
+  var rings = document.querySelectorAll("circle.circ");
+  var scores = document.querySelectorAll("div.score > span.current_score");
+  const scoreObj = []
+  for (i=0; i < rings.length; i++) {
+    let ring = rings[i].classList[1].toString();
+    let score = parseInt(scores[i].innerHTML);
+    let obj = {};
+    obj[ring] = score;
+    scoreObj.push(obj);
+  }
 
-  function setProgress(percent, sid) {
+  scoreObj.forEach(setProgress())
+
+
+
+  function setProgress(name, percent) {
     percent = (parseInt(percent) / 500) * 100;
     console.log(percent);
-    let progressCircle = document.querySelector(`.circ4-${sid}`);
+    let progressCircle = document.querySelector(`circle.circ.${name}`);
     let radius = progressCircle.r.baseVal.value;
     let circumference = radius * 2 * Math.PI;
     progressCircle.style.strokeDasharray = circumference;
