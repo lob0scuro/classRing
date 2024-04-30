@@ -34,6 +34,9 @@ class Student(db.Model):
         ring = Ring(student_id=self.id, current_value=0, target_value=100)
         db.session.add(ring)
         db.session.commit()
+        
+    def __repr__(self):
+        return f"{self.name}"
 
 class Ring(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

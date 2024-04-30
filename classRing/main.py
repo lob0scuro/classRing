@@ -19,6 +19,7 @@ def load_user(user_id):
 @mainBP.route("/", methods=('GET', 'POST'))
 def login():
     form = LoginForm()
+    #form.students.query = Student.query.filter(admin_id=current_user.id).all()
     if form.validate_on_submit():
         name = form.name.data
         password = form.password.data
