@@ -8,6 +8,5 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 class StudentForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
+    name = StringField('name', validators=[DataRequired()])
     submit = SubmitField('Queue')
-    students = SelectField('Students', choices=[])

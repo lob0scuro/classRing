@@ -28,8 +28,8 @@ body {
   padding: 0;
   background-image: linear-gradient(90deg, var(--bgDark), var(--bgLight));
   font-family: var(--font);
-  min-width: 380px;
-  max-width: 500px;
+  min-width: fit-content;
+  max-width: 100%;
 }
 
 /*FLASH BLOCK*/
@@ -134,7 +134,7 @@ form#studentRegistration {
   background-color: var(--bgLight);
   border-radius: 15px;
   padding: 15% 5%;
-  margin: 25% auto;
+  margin: 12% auto;
   box-shadow: 8px 8px 2px 2px rgba(0, 0, 0, 0.2);
 }
 

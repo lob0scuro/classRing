@@ -13,8 +13,8 @@ Dashboard{% endblock %} {% block content %}
   <h3>Student Queue</h3>
 </div>
 
-<form id="register-student-form" method="post">
-  {{ form.csrf_token }} {{ form.name }} {{ form.submit }}
+<form id="register-student-form" method="post" action="{{ url_for('main.dash') }}">
+  {{ form.csrf_token }} {{ form.name }} {{ form.submit(class_='btn') }}
 </form>
 
 <ul id="student-queue">
@@ -23,10 +23,10 @@ Dashboard{% endblock %} {% block content %}
     <svg id="testvg" class="rotate" width="35" height="35">
       <circle r="12" cx="50%" cy="50%" />
     </svg>
-    {{ student.name }} &nbsp;&nbsp;
-    <a href="{{ url_for('main.delete', sid=student.id) }}"
+    {{ student.name }}
+    <!--<a href="{{ url_for('main.delete', sid=student.id) }}"
       ><i class="fa-regular fa-trash-can"></i
-    ></a>
+    ></a>-->
     <p class="status">
       Status: active |
       <a
@@ -43,9 +43,9 @@ Dashboard{% endblock %} {% block content %}
       <circle r="12" cx="50%" cy="50%" />
     </svg>
     {{ student.name }} &nbsp;&nbsp;
-    <a href="{{ url_for('main.delete', sid=student.id) }}"
+    <!--<a href="{{ url_for('main.delete', sid=student.id) }}"
       ><i class="fa-regular fa-trash-can"></i
-    ></a>
+    ></a>-->
     <p class="status">
       Status: waiting... |
       <a
