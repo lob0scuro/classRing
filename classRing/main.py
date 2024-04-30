@@ -110,19 +110,33 @@ def masterLoader():
     
 
 
-@mainBP.route('update/<int:sid>/<val>', methods=('GET', 'POST'))
+@mainBP.route('update-up/<int:sid>/<val>', methods=('GET', 'POST'))
 @login_required
-def update(sid, val):
-    student = Student.query.get(sid)
-    if str(val.lower()) == 'add':
-        student.ring.current_value += 1
+def updateUp(sid, val):
+    try:
+        student = Student.query.get(sid)
+        student.ring.current_value += int(val)
         db.session.commit()
-    elif str(val.lower()) == 'sub':
-        student.ring.current_value -= 1
+    except Exception as e:
+        flash(f"Error: {e}")
+        db.session.rollback()
+    return str(student.ring.current_value)
+
+@mainBP.route('update-down/<int:sid>/<val>', methods=('GET', 'POST'))
+@login_required
+def updateDown(sid, val):
+    try:
+        student = Student.query.get(sid)
+        student.ring.current_value -= int(val)
         db.session.commit()
-    else:
-        flash("incorrent url param")
-    return render_template('circles.html', student=student)
+    except Exception as e:
+        flash(f"Error: {e}")
+        db.session.rollback()
+    return str(student.ring.current_value)
+
+
+
+
 
 @mainBP.route("/activate/<int:sid>", methods=('POST', 'GET'))
 @login_required
@@ -140,6 +154,10 @@ def activate(sid):
             db.session.rollback()
         return redirect(url_for('.dash'))
     return render_template('dash.html', form=form, students=students)
+
+
+
+
 
 @mainBP.route("/deactivate/<int:sid>", methods=('POST', 'GET'))
 @login_required

@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block content %}
 <form method="post" id="studentRegistration">
+  <legend class="text-glow">Admin Login</legend>
   {{ form.csrf_token }} {{ form.name(placeholder="username") }} {{
   form.password(placeholder="password") }} {{ form.submit(class_='btn') }}
 </form>

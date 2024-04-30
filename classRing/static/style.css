@@ -1,6 +1,7 @@
 :root,
 :root.light {
   --bgDark: #b2b5e0;
+  --Dark: #9498c9;
   --bgLight: #c5adc5;
   --textDark: #c5adc5;
   --textLight: #c5adc5;
@@ -67,14 +68,15 @@ ul#flash-block button:hover {
 /*NAVBAR index.html*/
 
 nav {
-  background-color: var(--bgDark);
+  background-color: var(--Dark);
   color: var(--textDark);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5%;
+  padding: 10% 0;
   box-shadow: 0 10px 8px -1px var(--bgLight);
   margin-bottom: 25px;
+  font-size: 1.5rem;
 }
 
 /*UTILS*/
@@ -128,14 +130,56 @@ form#studentRegistration {
   flex-direction: column;
   gap: 25px;
   text-align: center;
-  width: 40vw;
+  width: 70vw;
   background-color: var(--bgLight);
+  border-radius: 15px;
   padding: 15% 5%;
+  margin: 25% auto;
+  box-shadow: 8px 8px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+form#studentRegistration input {
+  font-size: 1.6rem;
+  background-color: var(--textLight);
+  color: var(--pure);
+}
+
+form#studentRegistration input[type="submit"] {
+  background-color: var(--bgDark);
+  width: 50%;
+  align-self: center;
+  font-size: 1.2rem;
+  border-width: 4px;
+  border-radius: 35px;
+  box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
+}
+form#studentRegistration input[type="submit"]:active {
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  transform: translate(2px, 2px);
 }
 
 /*dash.html*/
 .greeting-block {
   text-align: center;
+  position: relative;
+}
+
+#masterRingSet {
+  position: relative;
+}
+
+svg#masterRing {
+  stroke-width: 15;
+  stroke: #000;
+  fill: none;
+  padding: 2%;
+  position: relative;
+}
+p#masterPoints {
+  position: absolute;
+  top: 65%;
+  right: 0;
+  left: 0;
 }
 
 form#register-student-form {
@@ -162,7 +206,7 @@ ul#student-queue li {
   margin: 5% auto 0 auto;
 }
 
-svg {
+svg.cir {
   stroke-width: 10;
   stroke: #000;
   fill: none;
@@ -220,3 +264,28 @@ svg {
 }
 
 /*comment*/
+
+/*svg sandbox*/
+svg#testvg {
+  border-radius: 50%;
+  padding: 0;
+}
+svg#testvg circle {
+  stroke: var(--pure);
+  stroke-width: 4px;
+  fill: none;
+  stroke-dasharray: 1.8px;
+}
+.rotate {
+  animation: rotate 3s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(-360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

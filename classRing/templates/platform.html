@@ -4,25 +4,57 @@ block content %}
   {% for student in students %}
   <div class="ring">
     <div class="circle circle4{{ student.id }}">
-      {% include 'circles.html' %}
+      <div class=" score scoreBlock-{{ student.id }}">
+        <span
+          id="score-{{student.id}}"
+          class="current_score score-{{ student.id }}"
+          >{{ student.ring.current_value }}</span
+        >/{{ student.ring.target_value }}
+      </div>
+      <svg class="cir circ-box" width="350" height="350">
+        <circle
+          id="c-{{ student.id }}"
+          class="circ"
+          r="150"
+          cx="50%"
+          cy="50%"
+        />
+      </svg>
     </div>
     <div class="user-block">
-      <strong data-id="{{ student.id }}" class="cardHeader cardHeader{{ student.name }}"
+      <strong
+        data-sid="{{ student.id }}"
+        class="cardHeader cardHeader{{ student.name }}"
         >{{ student.name }}</strong
       >
       <div class="controller-block">
-        <a
-          hx-post="{{ url_for('main.update', sid=student.id, val='sub') }}"
-          hx-target=".circle4{{ student.id }}"
+        <button
+          hx-post="{{ url_for('main.updateDown', sid=student.id, val='5') }}"
+          hx-target="span.score-{{ student.id }}"
           hx-trigger="click"
-          ><button class="controller-btn sub" data-value="sub">-</button></a
+          class="controller-btn sub"
+          data-value="sub"
         >
-        <a
-          hx-post="{{ url_for('main.update', sid=student.id, val='add') }}"
-          hx-target=".circle4{{ student.id }}"
+          -5
+        </button>
+        <button
+          hx-post="{{ url_for('main.updateUp', sid=student.id, val='5') }}"
+          hx-target="span.score-{{ student.id }}"
           hx-trigger="click"
-          ><button class="controller-btn add" data-value="add">+</button></a
+          class="controller-btn sub"
+          data-value="sub"
         >
+          +5
+        </button>
+        <button
+          hx-post="{{ url_for('main.updateUp', sid=student.id, val='50') }}"
+          hx-target="span.score-{{ student.id }}"
+          hx-trigger="click"
+          class="controller-btn add"
+          data-value="add"
+        >
+          +50!
+        </button>
       </div>
     </div>
   </div>
@@ -30,28 +62,19 @@ block content %}
 </div>
 <a class="btn center" href="{{ url_for('main.countPoints') }}">Load Points</a>
 
-<script defer>
-  //setInterval(setProgress, 2000, );
-  //grab rings and scores
-  var rings = document.querySelectorAll("circle.circ");
-  var scores = document.querySelectorAll("div.score > span.current_score");
-  const scoreObj = []
-  for (i=0; i < rings.length; i++) {
-    let ring = rings[i].classList[1].toString();
-    let score = parseInt(scores[i].innerHTML);
-    let obj = {};
-    obj[ring] = score;
-    scoreObj.push(obj);
+<script>
+  function showem() {
+    var rings = document.querySelectorAll(".circ");
+    var scores = document.getElementsByClassName("current_score");
+    var id_raw = document.querySelectorAll("strong.cardHeader");
+    for (i = 0; i < scores.length; i++) {
+      setProgress(parseInt(scores[i].textContent), id_raw[i].dataset.sid);
+    }
   }
 
-  scoreObj.forEach(setProgress())
-
-
-
-  function setProgress(name, percent) {
-    percent = (parseInt(percent) / 500) * 100;
-    console.log(percent);
-    let progressCircle = document.querySelector(`circle.circ.${name}`);
+  function setProgress(score, id) {
+    percent = (parseInt(score) / 100) * 100;
+    let progressCircle = document.getElementById("c-" + id);
     let radius = progressCircle.r.baseVal.value;
     let circumference = radius * 2 * Math.PI;
     progressCircle.style.strokeDasharray = circumference;
@@ -59,5 +82,7 @@ block content %}
     progressCircle.style.strokeDashoffset =
       circumference - (percent / 100) * circumference;
   }
+
+  setInterval(showem, 10);
 </script>
 {% endblock %}

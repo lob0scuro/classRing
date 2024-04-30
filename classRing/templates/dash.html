@@ -1,11 +1,16 @@
 {% extends "base.html" %} {% block title %} {{ current_user.name }}'s
 Dashboard{% endblock %} {% block content %}
 <div class="greeting-block">
-  <p>
-    Hello, {{ current_user.name }}: {{ current_user.current_value }}/{{
-    current_user.target_value }}
-  </p>
-  <h3>Register Students</h3>
+  <p>Hello, {{ current_user.name }}</p>
+  <div id="masterRingSet">
+    <svg id="masterRing" class="cir" width="350" height="350">
+      <circle r="150" cx="50%" cy="50%" />
+    </svg>
+    <p id="masterPoints">
+      {{ current_user.current_value }}/{{ current_user.target_value }}
+    </p>
+  </div>
+  <h3>Student Queue</h3>
 </div>
 
 <form id="register-student-form" method="post">
@@ -15,6 +20,9 @@ Dashboard{% endblock %} {% block content %}
 <ul id="student-queue">
   {% for student in students %} {% if student.is_active is sameas true %}
   <li class="go student active-student">
+    <svg id="testvg" class="rotate" width="35" height="35">
+      <circle r="12" cx="50%" cy="50%" />
+    </svg>
     {{ student.name }} &nbsp;&nbsp;
     <a href="{{ url_for('main.delete', sid=student.id) }}"
       ><i class="fa-regular fa-trash-can"></i
@@ -24,14 +32,16 @@ Dashboard{% endblock %} {% block content %}
       <a
         class="stop text-small"
         href="{{ url_for('main.deactivate', sid=student.id) }}"
-        >-remove</a
+        >-queue</a
       >
     </p>
-
-    {% else %}
   </li>
+  {% else %}
 
   <li class="stop student inactive-student">
+    <svg id="testvg" width="35" height="35">
+      <circle r="12" cx="50%" cy="50%" />
+    </svg>
     {{ student.name }} &nbsp;&nbsp;
     <a href="{{ url_for('main.delete', sid=student.id) }}"
       ><i class="fa-regular fa-trash-can"></i
@@ -41,7 +51,7 @@ Dashboard{% endblock %} {% block content %}
       <a
         class="go text-small"
         href="{{ url_for('main.activate', sid=student.id) }}"
-        >+joinQ</a
+        >+queue</a
       >
     </p>
 

@@ -31,7 +31,7 @@ class Student(db.Model):
         return student
 
     def create_ring(self):
-        ring = Ring(student_id=self.id, current_value=0, target_value=500)
+        ring = Ring(student_id=self.id, current_value=0, target_value=100)
         db.session.add(ring)
         db.session.commit()
 
