@@ -19,7 +19,6 @@ def load_user(user_id):
 @mainBP.route("/", methods=('GET', 'POST'))
 def login():
     form = LoginForm()
-    #form.students.query = Student.query.filter(admin_id=current_user.id).all()
     if form.validate_on_submit():
         name = form.name.data
         password = form.password.data
@@ -45,17 +44,19 @@ def login():
 def dash():
     form = StudentForm()
     students = Student.query.filter_by(admin_id=current_user.id).all()
+    form.choices.query = Student.query.filter_by(admin_id=current_user.id).all()
     if form.validate_on_submit():
-        name = form.name.data
-        try:
-            queueStudent = Student.create_with_ring(name=name.capitalize(), admin_id=current_user.id)
+        print(form.choices.data)
+        #name = form.name.data
+        # try:
+        #     queueStudent = Student.create_with_ring(name=name.capitalize(), admin_id=current_user.id)
         
-            db.session.add(queueStudent)
-            db.session.commit()
-            flash(f"{queueStudent.name} added to Queue!")
-        except Exception as e:
-            flash(f"Error: {e}")
-            db.session.rollback()
+        #     db.session.add(queueStudent)
+        #     db.session.commit()
+        #     flash(f"{queueStudent.name} added to Queue!")
+        # except Exception as e:
+        #     flash(f"Error: {e}")
+        #     db.session.rollback()
         return redirect(url_for('.dash'))
 
 

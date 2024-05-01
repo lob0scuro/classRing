@@ -13,8 +13,12 @@ Dashboard{% endblock %} {% block content %}
   <h3>Student Queue</h3>
 </div>
 
-<form id="register-student-form" method="post" action="{{ url_for('main.dash') }}">
-  {{ form.csrf_token }} {{ form.name }} {{ form.students }} {{ form.submit(class_='btn') }}
+<form
+  id="register-student-form"
+  method="post"
+  action="{{ url_for('main.dash') }}"
+>
+  {{ form.csrf_token }} {{ form.choices }} {{ form.submit(class_='btn') }}
 </form>
 
 <ul id="student-queue">
