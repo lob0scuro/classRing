@@ -1,0 +1,11 @@
+.btnBlock {
+  display: flex;
+  gap: 3px;
+}
+
+.btn:first-child {
+  border-radius: 35px 0 0 35px;
+}
+.btn:last-child {
+  border-radius: 0 35px 35px 0;
+}
