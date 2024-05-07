@@ -1,0 +1,31 @@
+:root {
+  --lightAqua: #e5f8ff;
+  --saturatedAqua: #c5eaf7;
+  --darkAqua: #1d4250;
+
+  --saturatedMoss: #87933c;
+  --pastelMoss: #d4df90;
+
+  --saturatedPink: #c957bd;
+  --pastelPink: #fcd8fc;
+
+  --darkOrange: #8a3c0e;
+  --saturatedOrange: #f06d22;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100svh;
+  background-color: var(--lightAqua);
+  font-family: "Audiowide", sans-serif;
+
+  background-repeat: no-repeat;
+}
