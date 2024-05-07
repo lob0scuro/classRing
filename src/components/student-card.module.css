@@ -1,0 +1,28 @@
+.studentCard {
+  background-color: var(--saturatedOrange);
+  width: 21rem;
+  height: 25rem;
+  margin: 10% auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.circle {
+  width: 100%;
+  height: 75%;
+  background-color: black;
+}
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.infoBlock h5 {
+  font-size: 2rem;
+}
+
+.controllerBlock {
+  display: flex;
+}
