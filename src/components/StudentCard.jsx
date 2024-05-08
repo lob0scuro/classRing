@@ -1,7 +1,7 @@
 import React from "react";
 import PointsButtonBlock from "./Buttons/PointsButtonBlock";
 
-const StudentCard = ({ name }) => {
+const StudentCard = ({ name, clr }) => {
   const colors = {
     blue: ["#c5eaf7", "#1d4250"],
     pink: ["#fcd8fc", "#c957bd"],
@@ -24,19 +24,19 @@ const StudentCard = ({ name }) => {
   };
 
   const cardStyles = {
-    backgroundColor: "var(--saturatedPink)",
+    backgroundColor: colors.pink[1],
     width: "21rem",
     height: "25rem",
     margin: "10% auto",
     display: "flex",
     flexDirection: "column",
-    border: "2px solid var(--saturatedPink)",
+    border: `2px solid` + colors.pink[1],
   };
 
   const circleStyles = {
     width: "100%",
     height: "75%",
-    backgroundColor: "var(--pastelPink)",
+    backgroundColor: colors.pink[0],
   };
 
   const infoBlockStyles = {

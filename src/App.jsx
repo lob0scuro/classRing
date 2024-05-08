@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Header />
-      <StudentCard name="Claire" />
+      <StudentCard name="Claire" clr="pink" />
     </>
   );
 }
