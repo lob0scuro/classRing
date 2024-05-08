@@ -1,6 +1,9 @@
 .btnBlock {
   display: flex;
-  gap: 3px;
+  gap: 2px;
+  border: 2px solid var(--pastelPink);
+  border-radius: 35px;
+  background-color: var(--pastelPink);
 }
 
 .btn:first-child {

@@ -8,6 +8,7 @@ const PointsButtonBlock = () => {
     fontWeight: "600",
     padding: "8px",
     color: "var(--saturatedPink)",
+    border: "2px solid var(--saturatedPink)",
   };
   return (
     <div className={styles.btnBlock}>
