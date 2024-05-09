@@ -1,14 +1,14 @@
 import React from "react";
 import styles from "./button-bar.module.css";
 
-const PointsButtonBlock = () => {
+const PointsButtonBlock = ({ clr }) => {
   const buttonStyles = {
-    backgroundColor: "var(--pastelPink)",
+    backgroundColor: clr[0],
     fontSize: "1.2rem",
     fontWeight: "600",
     padding: "8px",
-    color: "var(--saturatedPink)",
-    border: "2px solid var(--saturatedPink)",
+    color: clr[1],
+    border: "2px solid " + clr[1],
   };
   return (
     <div className={styles.btnBlock}>

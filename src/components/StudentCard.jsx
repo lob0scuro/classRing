@@ -1,19 +1,12 @@
 import React from "react";
 import PointsButtonBlock from "./Buttons/PointsButtonBlock";
 
-const StudentCard = ({ name, clr }) => {
-  const colors = {
-    blue: ["#c5eaf7", "#1d4250"],
-    pink: ["#fcd8fc", "#c957bd"],
-    orange: ["#f06d22", "#8a3c0e"],
-    green: ["#d4df90", "#87933c"],
-  };
-
+const StudentCard = ({ name, color }) => {
   const svgStyles = {
     width: "100%",
     height: "100%",
     fill: "none",
-    stroke: colors.pink[1],
+    stroke: color[1],
     strokeWidth: "25",
     strokeLinecap: "round",
     strokeLinejoin: "round",
@@ -24,19 +17,19 @@ const StudentCard = ({ name, clr }) => {
   };
 
   const cardStyles = {
-    backgroundColor: colors.pink[1],
+    backgroundColor: color[1],
     width: "21rem",
     height: "25rem",
     margin: "10% auto",
     display: "flex",
     flexDirection: "column",
-    border: `2px solid` + colors.pink[1],
+    border: `2px solid` + color[1],
   };
 
   const circleStyles = {
     width: "100%",
     height: "75%",
-    backgroundColor: colors.pink[0],
+    backgroundColor: color[0],
   };
 
   const infoBlockStyles = {
@@ -55,8 +48,17 @@ const StudentCard = ({ name, clr }) => {
         </svg>
       </div>
       <div style={infoBlockStyles}>
-        <h5 style={{ textAlign: "center", fontSize: "2rem" }}>{name}</h5>
-        <PointsButtonBlock />
+        <h5
+          style={{
+            textAlign: "center",
+            fontSize: "2rem",
+            color: "#fefefe",
+            textShadow: "-2px 2px 3px rgba(0,0,0,0.8)",
+          }}
+        >
+          {name}
+        </h5>
+        <PointsButtonBlock clr={color} />
       </div>
     </div>
   );
