@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "./components/Header.jsx";
 import LoginForm from "./components/LoginForm.jsx";
 import StudentCard from "./components/StudentCard.jsx";
@@ -28,6 +29,27 @@ const students = [
 ];
 
 function App() {
+  //call backend api
+  const [firstName, setFirstName] = useState("bill");
+  const [lastName, setLastName] = useState("green");
+  const getStudentInfo = async (e) => {
+    e.preventDefault();
+
+    data = { sid };
+
+    url = "http://127.0.0.1:5000/api/get_student/6";
+
+    body = JSON.stringify(data);
+
+    const callAPI = await fetch(url);
+    if (callAPI.status !== 201 && callAPI.status !== 200) {
+      const data = await callAPI.json();
+      alert(data.message);
+    } else {
+      // do something else (CURRENT TAKS)
+    }
+  };
+
   //map through the students and create student card compnents
   const cards = students.map((student) => {
     return <StudentCard name={student.name} color={student.color} />;
@@ -36,8 +58,21 @@ function App() {
   return (
     <>
       <Header />
-      <LoginForm />
+      <form onSubmit={getStudentInfo}>
+        <input
+          type="number"
+          onChange={(e) => {
+            e.target.value;
+          }}
+        />
+        <button type="submit">get </button>
+      </form>
+      <ul style={{ textAlign: "center" }}>
+        <li>{firstName}</li>
+        <li>{lastName}</li>
+      </ul>
       {/*
+      <LoginForm />
       <Dashboard students={students} colors={colors} />
       {cards}
       */}

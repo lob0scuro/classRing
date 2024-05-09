@@ -51,7 +51,7 @@ const LoginForm = () => {
       <label style={labelStyles} htmlFor="username">
         Username
       </label>
-      <input style={inputStyles} type="text" placeholder="username" />
+      <input style={inputStyles} type="number" placeholder="username" />
       <label style={labelStyles} htmlFor="password">
         Password
       </label>
