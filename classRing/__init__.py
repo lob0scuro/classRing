@@ -10,6 +10,7 @@ login_manager = LoginManager()
 cors = CORS()
 
 
+
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config["SQLALCHEMY_DATABASE_URI"] = Config["SQLALCHEMY_DATABASE_URI"]
